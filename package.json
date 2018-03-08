@@ -1,0 +1,57 @@
+{
+  "name": "bp-account-manager",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A tool to manage my bank account",
+  "author": "Julien Usson",
+  "main": "electron-main.js",
+  "homepage": "./",
+  "dependencies": {
+    "babel-eslint": "^8.2.2",
+    "dot-prop-immutable": "^1.4.0",
+    "history": "^4.7.2",
+    "lodash": "^4.17.5",
+    "material-ui": "^1.0.0-beta.36",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-pickers": "^1.0.0-rc.2",
+    "moment": "^2.21.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "recharts": "^1.0.0-beta.10",
+    "recompose": "^0.26.0"
+  },
+  "scripts": {
+    "start": "concurrently --kill-others \"npm run react:start\" \"wait-on http://localhost:3000 && npm run electron:start\"",
+    "build": "npm run react:build && npm run electron:build",
+    "lint": "eslint src --fix",
+    "test": "react-scripts test --env=jsdom",
+    "react:start": "cross-env BROWSER=none react-scripts start",
+    "react:build": "react-scripts build",
+    "electron:start": "cross-env NODE_ENV=development electron .",
+    "preelectron:build": "shx cp package.json build/ && shx cp electron-main.js build/",
+    "electron:build": "electron-packager build --platform win32 --arch x64 --asar --no-prune --out dist --overwrite",
+    "clean": "shx rm -rf dist && shx rm -rf build"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.3",
+    "electron": "^1.8.3",
+    "electron-packager": "^11.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jest": "^21.13.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.11.1",
+    "shx": "^0.2.2",
+    "wait-on": "^2.1.0"
+  }
+}
