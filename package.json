@@ -8,21 +8,15 @@
   "homepage": "./",
   "dependencies": {
     "babel-eslint": "^8.2.2",
-    "dot-prop-immutable": "^1.4.0",
-    "history": "^4.7.2",
     "iconv-lite": "^0.4.19",
     "lodash": "^4.17.5",
     "material-ui": "^1.0.0-beta.36",
-    "material-ui-icons": "^1.0.0-beta.36",
-    "material-ui-pickers": "^1.0.0-rc.2",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.9",
-    "react-scripts": "1.1.1",
-    "recharts": "^1.0.0-beta.10",
-    "recompose": "^0.26.0"
+    "react-scripts": "1.1.1"
   },
   "scripts": {
     "start": "concurrently --kill-others \"npm run react:start\" \"wait-on http://localhost:3000 && npm run electron:start\"",
