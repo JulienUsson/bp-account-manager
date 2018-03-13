@@ -1,4 +1,6 @@
 import iconv from 'iconv-lite'
+import moment from 'moment'
+import orderBy from 'lodash/orderBy'
 const electron = window.require('electron')
 const fs = electron.remote.require('fs')
 
@@ -25,10 +27,13 @@ export default file => {
         })
         .map(({ Montant, ...other }) => ({
           ...other,
+          'Date opération': moment(other['Date opération'], 'DD/MM/YYYY'),
           Montant: Number(Montant.replace(',', '.')),
         }))
 
-      resolve(result)
+      const orderedResult = orderBy(result, ['Date opération'])
+
+      resolve(orderedResult)
     })
   })
 }

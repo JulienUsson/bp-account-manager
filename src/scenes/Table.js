@@ -6,17 +6,17 @@ const TableComponent = ({ data }) => (
   <Table>
     <TableHead>
       <TableRow>
-        {Object.keys(data[0]).map(key => (
-          <TableCell key={key}>{key}</TableCell>
-        ))}
+        <TableCell>Date</TableCell>
+        <TableCell>Libellé</TableCell>
+        <TableCell numeric>Montant</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
       {data.map(obj => (
-        <TableRow key={obj}>
-          {Object.values(obj).map(value => (
-            <TableCell key={value}>{value}</TableCell>
-          ))}
+        <TableRow key={obj['Date opération'] + obj['Référence']}>
+          <TableCell>{obj['Date opération'].format('DD/MM/YYYY')}</TableCell>
+          <TableCell>{obj['Libellé']}</TableCell>
+          <TableCell numeric>{obj['Montant']}</TableCell>
         </TableRow>
       ))}
     </TableBody>
@@ -24,7 +24,7 @@ const TableComponent = ({ data }) => (
 )
 
 TableComponent.propTypes = {
-  data: propTypes.object.isRequired,
+  data: propTypes.array.isRequired,
 }
 
 export default TableComponent
