@@ -4,6 +4,12 @@ body {
   font-family: 'Roboto';
 }
 
+html, body, #root {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+}
+
 ::-webkit-scrollbar
 {
 	width: 6px;
