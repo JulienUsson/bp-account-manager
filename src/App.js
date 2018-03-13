@@ -1,18 +1,34 @@
 import React from 'react'
 import { MuiThemeProvider, Reboot } from 'material-ui'
-import { BrowserRouter } from 'react-router-dom'
 
 import theme from './theme'
-import Routes from './Routes'
+import Import from './scenes/Import'
+import Table from './scenes/Table'
 import './index.css'
 
-const App = () => (
-  <MuiThemeProvider theme={theme}>
-    <Reboot />
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
-  </MuiThemeProvider>
-)
+const App = class extends React.Component {
+  state = {
+    data: null,
+  }
+
+  onLoad = data => this.setState({ data })
+
+  renderBody = () => {
+    const { data } = this.state
+    if (!data) {
+      return <Import onLoad={this.onLoad} />
+    }
+    return <Table data={data} />
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Reboot />
+        {this.renderBody()}
+      </MuiThemeProvider>
+    )
+  }
+}
 
 export default App
