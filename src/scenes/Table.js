@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
   withStyles,
+  Checkbox,
 } from 'material-ui'
 
 const styles = theme => ({
@@ -27,6 +28,10 @@ const styles = theme => ({
 })
 
 class TableComponent extends React.Component {
+  state = {
+    exportedData: [],
+  }
+
   getClassName = price => {
     const { classes } = this.props
     let color
@@ -40,13 +45,25 @@ class TableComponent extends React.Component {
     return classnames(color, classes.price)
   }
 
+  handleChange = obj => event => {
+    if (event.target.checked) {
+      this.setState(state => ({ exportedData: [...state.exportedData, obj] }))
+    } else {
+      this.setState(state => ({
+        exportedData: state.exportedData.filter(o => o !== obj),
+      }))
+    }
+  }
+
   render() {
     const { data } = this.props
+    const { exportedData } = this.state
 
     return (
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell />
             <TableCell>Date</TableCell>
             <TableCell>Libellé</TableCell>
             <TableCell numeric>Montant</TableCell>
@@ -55,6 +72,13 @@ class TableComponent extends React.Component {
         <TableBody>
           {data.map(obj => (
             <TableRow key={obj['Date opération'] + obj['Référence']}>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  color="primary"
+                  checked={exportedData.includes(obj)}
+                  onChange={this.handleChange(obj)}
+                />
+              </TableCell>
               <TableCell>
                 {obj['Date opération'].format('DD/MM/YYYY')}
               </TableCell>
