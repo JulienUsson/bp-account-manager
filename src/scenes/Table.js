@@ -13,6 +13,7 @@ import {
   Snackbar,
 } from 'material-ui'
 import ExportIcon from 'material-ui-icons/ContentCopy'
+import copyToClipboard from 'utils/copyToClipboard'
 
 const styles = theme => ({
   price: {
@@ -72,6 +73,8 @@ class TableComponent extends React.Component {
   }
 
   export = () => {
+    const { exportedData } = this.state
+    copyToClipboard(exportedData)
     this.setState({ open: true })
   }
 
