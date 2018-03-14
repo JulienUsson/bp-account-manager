@@ -129,7 +129,7 @@ class TableComponent extends React.Component {
           open={open}
           onClose={this.handleClose}
           message="Copied to clipboard"
-          autoHideDuration="750"
+          autoHideDuration={750}
         />
       </div>
     )
