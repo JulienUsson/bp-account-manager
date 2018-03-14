@@ -25,8 +25,9 @@ export default file => {
           })
           return obj
         })
-        .map(({ Montant, ...other }) => ({
+        .map(({ Montant, Libellé, ...other }) => ({
           ...other,
+          Libellé: Libellé.replace(/\d{6} .{2}\*{4}\d{4} /, ''),
           'Date opération': moment(other['Date opération'], 'DD/MM/YYYY'),
           Montant: Number(Montant.replace(',', '.')),
         }))
