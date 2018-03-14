@@ -10,6 +10,7 @@ import {
   withStyles,
   Checkbox,
   Button,
+  Snackbar,
 } from 'material-ui'
 import ExportIcon from 'material-ui-icons/ContentCopy'
 
@@ -39,6 +40,7 @@ const styles = theme => ({
 
 class TableComponent extends React.Component {
   state = {
+    open: false,
     exportedData: [],
   }
 
@@ -65,9 +67,17 @@ class TableComponent extends React.Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
+  export = () => {
+    this.setState({ open: true })
+  }
+
   render() {
     const { data, classes } = this.props
-    const { exportedData } = this.state
+    const { exportedData, open } = this.state
 
     return (
       <div className={classes.container}>
@@ -110,9 +120,17 @@ class TableComponent extends React.Component {
           color="secondary"
           aria-label="export"
           className={classes.button}
+          onClick={this.export}
         >
           <ExportIcon />
         </Button>
+
+        <Snackbar
+          open={open}
+          onClose={this.handleClose}
+          message="Copied to clipboard"
+          autoHideDuration="750"
+        />
       </div>
     )
   }
