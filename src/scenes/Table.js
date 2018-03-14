@@ -9,7 +9,9 @@ import {
   TableRow,
   withStyles,
   Checkbox,
+  Button,
 } from 'material-ui'
+import ExportIcon from 'material-ui-icons/ContentCopy'
 
 const styles = theme => ({
   price: {
@@ -24,6 +26,14 @@ const styles = theme => ({
   },
   good: {
     color: '#FF5722',
+  },
+  container: {
+    paddingBottom: 75,
+  },
+  button: {
+    position: 'fixed',
+    bottom: 15,
+    right: 15,
   },
 })
 
@@ -56,40 +66,54 @@ class TableComponent extends React.Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, classes } = this.props
     const { exportedData } = this.state
 
     return (
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Date</TableCell>
-            <TableCell>Libellé</TableCell>
-            <TableCell numeric>Montant</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(obj => (
-            <TableRow key={obj['Date opération'] + obj['Référence']}>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={exportedData.includes(obj)}
-                  onChange={this.handleChange(obj)}
-                />
-              </TableCell>
-              <TableCell>
-                {obj['Date opération'].format('DD/MM/YYYY')}
-              </TableCell>
-              <TableCell>{obj['Libellé']}</TableCell>
-              <TableCell className={this.getClassName(obj['Montant'])} numeric>
-                {obj['Montant']}
-              </TableCell>
+      <div className={classes.container}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Date</TableCell>
+              <TableCell>Libellé</TableCell>
+              <TableCell numeric>Montant</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {data.map(obj => (
+              <TableRow key={obj['Date opération'] + obj['Référence']}>
+                <TableCell padding="checkbox">
+                  <Checkbox
+                    color="primary"
+                    checked={exportedData.includes(obj)}
+                    onChange={this.handleChange(obj)}
+                  />
+                </TableCell>
+                <TableCell>
+                  {obj['Date opération'].format('DD/MM/YYYY')}
+                </TableCell>
+                <TableCell>{obj['Libellé']}</TableCell>
+                <TableCell
+                  className={this.getClassName(obj['Montant'])}
+                  numeric
+                >
+                  {obj['Montant']}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        <Button
+          variant="fab"
+          color="secondary"
+          aria-label="export"
+          className={classes.button}
+        >
+          <ExportIcon />
+        </Button>
+      </div>
     )
   }
 }
