@@ -21,13 +21,13 @@ const styles = theme => ({
     fontWeight: 'bold',
   },
   bad: {
-    color: '#F44336',
+    color: '#FF5722',
   },
   veryBad: {
     color: '#B71C1C',
   },
   good: {
-    color: '#FF5722',
+    color: '#00C853',
   },
   container: {
     paddingBottom: 75,
